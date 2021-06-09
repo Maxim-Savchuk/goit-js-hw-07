@@ -19,19 +19,10 @@ const images = [
 const galleryEl = document.querySelector('#gallery');
 galleryEl.classList.add('gallery');
 
-const makeItemsEl = items => {
-  return items.map(item => {
-    const itemEl = document.createElement('li');
-    itemEl.classList.add('gallery__item');
-    const imageEl = document.createElement('img');
-    imageEl.classList.add('gallery__img');
-    imageEl.src = item.url;
-    imageEl.alt = item.alt;
-    itemEl.appendChild(imageEl);
 
-    return itemEl;
-  });
-};
+const markup = images.map(({ url, alt }) => {
+  return `<li class="gallery__item"><img src=${url} alt="${alt}" class="gallery__img"></li>`;
+}).join('');
 
-const elements = makeItemsEl(images);
-galleryEl.append(...elements);
+
+galleryEl.insertAdjacentHTML('afterbegin', markup);
